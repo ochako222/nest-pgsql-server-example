@@ -24,9 +24,13 @@ export class TimeSlotsController {
 
     @Post()
     @Header('Cache-Control', 'none')
-    async create(@Body() createTimeSlotDto: CreateTimeSlotDto, @Req() req: Request, @Res() res: Response): Promise<void | { message: string; }> {
+    async create(@Body() createTimeSlotDto: CreateTimeSlotDto, @Req() req: Request, @Res() res: Response) {
         const response = await this.timeSlotsService.create(createTimeSlotDto);
-        if (response.message) res.status(401).json(response.message)
+        if (response?.message) {
+            res.status(400).json(response.message)
+        } else {
+            res.status(201).json({message: "added"})
+        }
     }
 
     @Delete(':id')

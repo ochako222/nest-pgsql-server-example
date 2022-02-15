@@ -5,6 +5,8 @@ import {IDoctor, ITimeSlot, IUser} from "../../types";
 import {DoctorsService} from "../../doctors/doctors.service";
 import {UsersService} from "../../users/users.service";
 import {TimeSlotsService} from "../../time-slots/timeSlots.service";
+import {timeSlotsRepository} from "../repositories";
+import {getRandomDigit} from "../../helpers/utils";
 
 const doctorsService = new DoctorsService()
 const usersService = new UsersService()
@@ -21,9 +23,17 @@ try {
         usersService.create(user)
     })
 
-    timeSlots.forEach((timeSlot: ITimeSlot) => {
-        timeSlotsService.create(timeSlot)
+    // timeSlots.forEach((timeSlot: ITimeSlot) => {
+    //     timeSlotsService.create(timeSlot)
+    // })
+
+    timeSlots.forEach(async (timeSlot: ITimeSlot) => {
+        await timeSlotsRepository.createTimeSlot({
+            ...timeSlot,
+            id: getRandomDigit(),
+        });
     })
+
 
 } catch (error: any) {
     throw new Error(error);
