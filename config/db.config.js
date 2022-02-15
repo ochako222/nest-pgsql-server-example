@@ -7,7 +7,7 @@ const { DB_NAME, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DIALECT } =
   process.env;
 
 module.exports = {
-  database: DB_NAME || 'doctor',
+  database: DB_NAME || 'entities',
   username: DB_USERNAME || 'postgres',
   password: DB_PASSWORD || 'postgres',
   host: DB_HOST || 'localhost',

@@ -6,7 +6,7 @@ import { IDoctor } from '../../types';
 
 const repo = getRepo(connection, DoctorModel);
 
-class DoctorRepository {
+class DoctorsRepository {
   public async getAll(): Promise<IDoctor[]> {
     const result = (await repo).find();
     return result;
@@ -22,10 +22,10 @@ class DoctorRepository {
     return result;
   }
 
-  public async deleteById(id: string): Promise<DeleteResult> {
+  public async deleteById(id: number): Promise<DeleteResult> {
     const result = (await repo).delete(id);
     return result;
   }
 }
 
-export { DoctorRepository };
+export { DoctorsRepository };

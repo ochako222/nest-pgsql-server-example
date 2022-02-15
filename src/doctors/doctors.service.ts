@@ -1,37 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { doctorRepository } from '../data/repositories';
+import { doctorsRepository } from '../data/repositories';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { getRandomDigit } from "../helpers/utils";
 
 @Injectable()
-export class DoctorServices {
-  // private doctors: IDoctor[] = [
-  //   {
-  //     id: '1',
-  //     phone: '123123',
-  //     firstName: 'asdasd',
-  //     lastName: 'asdas',
-  //   },
-  //   {
-  //     id: '2',
-  //     phone: '123123',
-  //     firstName: 'asdasd',
-  //     lastName: 'asdas',
-  //   },
-  // ];
+export class DoctorsService {
 
   async getAll() {
-    return await doctorRepository.getAll();
+    return await doctorsRepository.getAll();
   }
 
-  // getById(id: string) {
-  //   return this.doctors.find((d) => d.id === id);
-  // }
-  //
+  async getById(id: number) {
+    return await doctorsRepository.getById(id);
+  }
+
   async create(doctorDto: CreateDoctorDto) {
-    await doctorRepository.createDoctor({
+    await doctorsRepository.createDoctor({
       ...doctorDto,
       id: getRandomDigit(),
     });
+  }
+
+  async delete(id:number){
+    await doctorsRepository.deleteById(id)
   }
 }

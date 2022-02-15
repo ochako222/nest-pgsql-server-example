@@ -1,5 +1,9 @@
-import { DoctorRepository } from "./doctor-repository";
+import {DoctorsRepository} from "./doctors-repository";
+import {UsersRepository} from "./users-repository";
+import {TimeSlotsRepository} from "./time-slots-repository";
 
-const doctorRepository = new DoctorRepository();
+const doctorsRepository = new DoctorsRepository();
+const usersRepository = new UsersRepository();
+const timeSlotsRepository = new TimeSlotsRepository()
 
-export { doctorRepository };
+export {doctorsRepository, usersRepository, timeSlotsRepository};

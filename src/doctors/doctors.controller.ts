@@ -1,50 +1,45 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Header,
-  HttpCode,
-  HttpStatus,
-  Param,
-  Post,
-  Put,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Header,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Post
 } from '@nestjs/common';
-import { CreateDoctorDto } from './dto/create-doctor.dto';
-import { UpdateDoctorDto } from './dto/update-doctor.dto';
-import { DoctorServices } from './doctors.service';
-import { IDoctor } from '../types';
-import { doctorService } from '../services';
+import {CreateDoctorDto} from './dto/create-doctor.dto';
+import {IDoctor} from '../types';
+import {DoctorsService} from "./doctors.service";
 
 @Controller('doctors')
 export class DoctorsController {
-  constructor(private readonly doctorService: DoctorServices) {}
+    constructor(private readonly doctorsService: DoctorsService) {
+    }
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  async getAll(): Promise<IDoctor[]> {
-    return await doctorService.getAll();
-  }
+    @Get()
+    @HttpCode(HttpStatus.OK)
+    async getAll(): Promise<IDoctor[]> {
+        return await this.doctorsService.getAll();
+    }
 
-  // @Get(':id')
-  // getOne(@Param('id') id: string): IDoctor {
-  //   return this.doctorService.getById(id);
-  // }
+    @Get(':id')
+    @HttpCode(HttpStatus.OK)
+    async getOne(@Param('id') id: number): Promise<IDoctor> {
+        return await this.doctorsService.getById(id);
+    }
 
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  @Header('Cache-Control', 'none')
-  async create(@Body() createDoctorDto: CreateDoctorDto): Promise<void> {
-    return await doctorService.create(createDoctorDto);
-  }
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    @Header('Cache-Control', 'none')
+    async create(@Body() createDoctorDto: CreateDoctorDto): Promise<void> {
+        return await this.doctorsService.create(createDoctorDto);
+    }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string): string {
-  //   return 'Remove: ' + id;
-  // }
-  //
-  // @Put(':id')
-  // update(@Body() updateProductDto: UpdateDoctorDto, @Param('id') id: string) {
-  //   return 'Update: ' + id;
-  // }
+    @Delete(':id')
+    @HttpCode(HttpStatus.OK)
+    async remove(@Param('id') id: number): Promise<void> {
+        return await this.doctorsService.delete(id);
+    }
 }

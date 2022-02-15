@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: postgres
     environment:
-      POSTGRES_DB: ${DB_NAME:-doctor}
+      POSTGRES_DB: ${DB_NAME:-entities}
       POSTGRES_USER: ${DB_USERNAME:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
