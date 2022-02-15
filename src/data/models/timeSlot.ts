@@ -12,9 +12,9 @@ export default class TimeSlotModel implements ITimeSlot {
     @Column('int')
     userId: number;
 
-    @Column('date')
+    @Column('timestamp')
     timeStart: Date;
 
-    @Column('date')
+    @Column('timestamp')
     timeEnd: Date;
 }
