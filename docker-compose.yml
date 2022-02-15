@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14.1
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-doctor}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - ${DB_PORT:-5432}:5432
+    volumes:
+      - ./docker/pgdata:/var/lib/postgresql/data
