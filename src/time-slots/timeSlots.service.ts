@@ -1,7 +1,8 @@
 import {Injectable} from '@nestjs/common';
-import {getRandomDigit} from "../helpers/utils";
+import {checkSlotAvailability, getRandomDigit} from "../helpers/utils";
 import {timeSlotsRepository} from "../data/repositories";
 import {CreateTimeSlotDto} from "./dto/create-time-slot.dto";
+import {isArray} from "util";
 
 @Injectable()
 export class TimeSlotsService {
@@ -15,10 +16,19 @@ export class TimeSlotsService {
     }
 
     async create(timeSlotDto: CreateTimeSlotDto) {
-        await timeSlotsRepository.createTimeSlot({
-            ...timeSlotDto,
-            id: getRandomDigit(),
-        });
+        const slots = await timeSlotsRepository.getAll();
+        const result = checkSlotAvailability(slots, timeSlotDto)
+        if (Array.isArray(result) && result.length) {
+            await timeSlotsRepository.createTimeSlot({
+                ...timeSlotDto,
+                id: getRandomDigit(),
+            });
+        } else {
+            return {
+                message: 'This slot is busy'
+            }
+        }
+
     }
 
     async delete(id: number) {

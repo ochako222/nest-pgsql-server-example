@@ -47,7 +47,8 @@ time_slots
 {
     user_id: '477e17a4-2a47-442d-9a2b-3d44a3c6b7da',    
     doctor_id: '905e03cf-4b04-46c3-9aff-600f00e1c00e',
-    time_slot: 'date_time'
+    time_start: datetime,
+	time_end: datetime
 }
 ```
 

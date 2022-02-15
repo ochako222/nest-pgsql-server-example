@@ -1,7 +1,8 @@
-import {Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, Param, Post} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, Param, Post, Req, Res} from "@nestjs/common";
 import {ITimeSlot} from "../types";
 import {TimeSlotsService} from "./timeSlots.service";
 import {CreateTimeSlotDto} from "./dto/create-time-slot.dto";
+import express, {Request, Response} from 'express';
 
 @Controller('time-slots')
 export class TimeSlotsController {
@@ -22,10 +23,10 @@ export class TimeSlotsController {
     }
 
     @Post()
-    @HttpCode(HttpStatus.CREATED)
     @Header('Cache-Control', 'none')
-    async create(@Body() createTimeSlotDto: CreateTimeSlotDto): Promise<void> {
-        return await this.timeSlotsService.create(createTimeSlotDto);
+    async create(@Body() createTimeSlotDto: CreateTimeSlotDto, @Req() req: Request, @Res() res: Response): Promise<void | { message: string; }> {
+        const response = await this.timeSlotsService.create(createTimeSlotDto);
+        if (response.message) res.status(401).json(response.message)
     }
 
     @Delete(':id')

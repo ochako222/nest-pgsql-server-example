@@ -12,6 +12,7 @@ export interface IUser {
     lastName: string;
 }
 
+
 export interface ITimeSlot {
     id: number;
     doctorId: number;
