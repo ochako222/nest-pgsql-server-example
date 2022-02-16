@@ -1,7 +1,7 @@
 export const getRandomDigit = () => Math.floor(Math.random() * 101 + 1);
 
 
-export const checkSlotAvailability = (slotsList: { timeStart: Date, timeEnd: Date }[], slot: { timeStart: Date, timeEnd: Date }) => {
+export const isSlotAvailable = (slotsList: { timeStart: Date, timeEnd: Date }[], slot: { timeStart: Date, timeEnd: Date }) => {
     const newSlotArr = []
 
     const filtered = slotsList.filter(elem=>elem.timeStart==slot.timeStart||elem.timeEnd==slot.timeEnd)
@@ -23,7 +23,7 @@ export const checkSlotAvailability = (slotsList: { timeStart: Date, timeEnd: Dat
     }
 
     for (let i = 1; i <= slotsList.length - 1; i++) {
-        if (slot.timeEnd < slotsList[i].timeStart && slot.timeStart > slotsList[i - 1].timeEnd) {
+        if (slot.timeEnd <= slotsList[i].timeStart && slot.timeStart >= slotsList[i - 1].timeEnd) {
             newSlotArr.push(slotsList[i - 1])
             newSlotArr.push(slot)
             for (let i = 1; i <= slotsList.length - 1; i++) {

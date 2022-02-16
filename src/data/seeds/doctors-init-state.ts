@@ -11,13 +11,13 @@ const users: IDoctor[] = [
     id: 2,
     phone: '+2323232322',
     firstName: 'Jim',
-    lastName: 'Baum',
+    lastName: 'Hendrix',
   },
   {
     id: 3,
     phone: '+1312313',
     firstName: 'Brain',
-    lastName: 'Baum',
+    lastName: 'Griffin',
   },
 ];
 export default users;

@@ -23,10 +23,6 @@ try {
         usersService.create(user)
     })
 
-    // timeSlots.forEach((timeSlot: ITimeSlot) => {
-    //     timeSlotsService.create(timeSlot)
-    // })
-
     timeSlots.forEach(async (timeSlot: ITimeSlot) => {
         await timeSlotsRepository.createTimeSlot({
             ...timeSlot,

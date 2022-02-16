@@ -4,8 +4,8 @@ const users: IUser[] = [
     {
         id: 1,
         phone: '+666666666',
-        firstName: 'Bogdana',
-        lastName: 'Chako',
+        firstName: 'Jack',
+        lastName: 'Rassel',
     },
     {
         id: 2,
@@ -16,8 +16,8 @@ const users: IUser[] = [
     {
         id: 3,
         phone: '+666666666',
-        firstName: 'Sveta',
-        lastName: 'Chako',
+        firstName: 'Martin',
+        lastName: 'King',
     },
 ];
 

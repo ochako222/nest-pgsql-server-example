@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {checkSlotAvailability, getRandomDigit} from "../helpers/utils";
+import {isSlotAvailable, getRandomDigit} from "../helpers/utils";
 import {timeSlotsRepository} from "../data/repositories";
 import {CreateTimeSlotDto} from "./dto/create-time-slot.dto";
 
@@ -10,9 +10,11 @@ export class TimeSlotsService {
         return await timeSlotsRepository.getAll();
     }
 
-    async getById(id: number) {
-        return await timeSlotsRepository.getById(id);
+    async getAllByDoctorId(doctorId: number) {
+        const slots = await timeSlotsRepository.getAll();
+        return slots.filter(elem => elem.doctorId == doctorId)
     }
+
 
     async create(timeSlotDto: CreateTimeSlotDto) {
         const {timeStart, timeEnd} = timeSlotDto
@@ -23,8 +25,7 @@ export class TimeSlotsService {
 
         const slots = await timeSlotsRepository.getAll();
 
-        // @ts-ignore
-        const sortedSlots = slots.slice().sort((a, b) => new Date(a.timeStart) - new Date(b.timeStart))
+        const sortedSlots = slots.slice().sort((a, b) => +new Date(a.timeStart) - +new Date(b.timeStart))
 
         const slotsList = sortedSlots.map(elem => {
             return {
@@ -33,7 +34,7 @@ export class TimeSlotsService {
             }
         })
 
-        const result = checkSlotAvailability(slotsList, slot)
+        const result = isSlotAvailable(slotsList, slot)
 
         if (Array.isArray(result) && result.length) {
             await timeSlotsRepository.createTimeSlot({

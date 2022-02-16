@@ -1,4 +1,4 @@
-import {Module} from '@nestjs/common';
+import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
 import {DoctorsController} from './doctors/doctors.controller';
 import {DoctorsService} from './doctors/doctors.service';
 import {UsersController} from "./users/users.controller";

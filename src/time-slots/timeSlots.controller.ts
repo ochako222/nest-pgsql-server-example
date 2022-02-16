@@ -16,10 +16,17 @@ export class TimeSlotsController {
         return await this.timeSlotsService.getAll();
     }
 
-    @Get(':id')
+    @Get(':doctorId')
     @HttpCode(HttpStatus.OK)
-    async getOne(@Param('id') id: number): Promise<ITimeSlot> {
-        return await this.timeSlotsService.getById(id);
+    async getAllByDoctorId(@Param('doctorId') doctorId: number, @Req() req: Request, @Res() res: Response) {
+        const response = await this.timeSlotsService.getAllByDoctorId(doctorId);
+        if (Array.isArray(response) && !response.length) {
+            res.status(400).json({
+                code: 400,
+                message: "there are not slots with such doctor's id"
+            })
+        }
+        res.status(400).json(response)
     }
 
     @Post()
@@ -27,9 +34,15 @@ export class TimeSlotsController {
     async create(@Body() createTimeSlotDto: CreateTimeSlotDto, @Req() req: Request, @Res() res: Response) {
         const response = await this.timeSlotsService.create(createTimeSlotDto);
         if (response?.message) {
-            res.status(400).json(response.message)
+            res.status(400).json({
+                code: 400,
+                message: response.message
+            })
         } else {
-            res.status(201).json({message: "added"})
+            res.status(201).json({
+                code: 200,
+                message: "your slot successfully added"
+            })
         }
     }
 
