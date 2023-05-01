@@ -10,11 +10,11 @@ export default class ProductModel implements ProductI {
   name: string;
 
   @Column('varchar', { length: 50 })
-  price: number;
+  price: string;
 
   @Column('varchar', { length: 400 })
   imageUrl: string;
 
   @Column('varchar', { length: 50 })
-  rating: number;
+  rating: string;
 }

@@ -1,7 +1,7 @@
 export class CreateProductDto {
   readonly id: number;
   readonly name: string;
-  readonly price: number;
+  readonly price: string;
   readonly imageUrl: string;
-  readonly rating: number;
+  readonly rating: string;
 }

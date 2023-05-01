@@ -1,9 +1,9 @@
 export interface ProductI {
   id: number;
   name: string;
-  price: number;
+  price: string;
   imageUrl: string;
-  rating: number;
+  rating: string;
 }
 
 export interface UserI {
