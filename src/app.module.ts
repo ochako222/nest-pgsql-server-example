@@ -1,15 +1,18 @@
-import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
-import {DoctorsController} from './doctors/doctors.controller';
-import {DoctorsService} from './doctors/doctors.service';
-import {UsersController} from "./users/users.controller";
-import {UsersService} from "./users/users.service";
-import {TimeSlotsService} from "./time-slots/timeSlots.service";
-import {TimeSlotsController} from "./time-slots/timeSlots.controller";
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
+
+import { UsersController } from './users/users.controller';
+import { UsersService } from './users/users.service';
+import { ProductsService } from './products/products.service';
+import { ProductsController } from './products/products.controller';
 
 @Module({
-    imports: [],
-    controllers: [DoctorsController, UsersController, TimeSlotsController],
-    providers: [DoctorsService, UsersService, TimeSlotsService],
+  imports: [],
+  controllers: [ProductsController, UsersController],
+  providers: [ProductsService, UsersService],
 })
-export class AppModule {
-}
+export class AppModule {}

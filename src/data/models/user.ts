@@ -1,17 +1,14 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { IUser} from '../../types';
+import { UserI } from '../../types';
 
 @Entity()
-export default class UserModel implements IUser {
-    @PrimaryGeneratedColumn()
-    id: number;
+export default class UserModel implements UserI {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('varchar', { length: 50 })
-    phone: string;
+  @Column('varchar', { length: 50 })
+  username: string;
 
-    @Column('varchar', { length: 50 })
-    firstName: string;
-
-    @Column('varchar', { length: 50 })
-    lastName: string;
+  @Column('varchar', { length: 50 })
+  password: string;
 }

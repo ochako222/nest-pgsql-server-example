@@ -1,24 +1,24 @@
 import { DeleteResult } from 'typeorm';
-import { DoctorModel } from '../models';
+import { ProductModel } from '../models';
 import { connection } from '../db/connections';
 import { getRepo } from '../../helpers/db-helpers';
-import { IDoctor } from '../../types';
+import { ProductI } from '../../types';
 
-const repo = getRepo(connection, DoctorModel);
+const repo = getRepo(connection, ProductModel);
 
-class DoctorsRepository {
-  public async getAll(): Promise<IDoctor[]> {
+class ProductsRepository {
+  public async getAll(): Promise<ProductI[]> {
     const result = (await repo).find();
     return result;
   }
 
-  public async getById(id: number): Promise<IDoctor | undefined> {
+  public async getById(id: number): Promise<ProductI | undefined> {
     const result = (await repo).findOne(id);
     return result;
   }
 
-  public async createDoctor(doctor: IDoctor): Promise<IDoctor> {
-    const result = (await repo).save(doctor);
+  public async createProduct(product: ProductI): Promise<ProductI> {
+    const result = (await repo).save(product);
     return result;
   }
 
@@ -28,4 +28,4 @@ class DoctorsRepository {
   }
 }
 
-export { DoctorsRepository };
+export { ProductsRepository };

@@ -1,9 +1,7 @@
-import {DoctorsRepository} from "./doctors-repository";
-import {UsersRepository} from "./users-repository";
-import {TimeSlotsRepository} from "./time-slots-repository";
+import { UsersRepository } from './users-repository';
+import { ProductsRepository } from './products-repository';
 
-const doctorsRepository = new DoctorsRepository();
+const productsRepository = new ProductsRepository();
 const usersRepository = new UsersRepository();
-const timeSlotsRepository = new TimeSlotsRepository()
 
-export {doctorsRepository, usersRepository, timeSlotsRepository};
+export { productsRepository, usersRepository };

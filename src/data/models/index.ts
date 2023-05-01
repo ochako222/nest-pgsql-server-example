@@ -1,7 +1,6 @@
-import DoctorModel from './doctor';
 import UserModel from './user';
-import TimeSlotModel from './timeSlot'
+import ProductModel from './product';
 
-export {DoctorModel, UserModel, TimeSlotModel};
+export { ProductModel, UserModel };
 
-export const modelArray = [DoctorModel, UserModel, TimeSlotModel];
+export const modelArray = [ProductModel, UserModel];

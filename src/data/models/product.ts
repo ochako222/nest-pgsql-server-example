@@ -1,17 +1,20 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { IDoctor } from '../../types';
+import { ProductI } from '../../types';
 
 @Entity()
-export default class DoctorModel implements IDoctor {
+export default class ProductModel implements ProductI {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column('varchar', { length: 50 })
-  phone: string;
+  name: string;
 
   @Column('varchar', { length: 50 })
-  firstName: string;
+  price: number;
+
+  @Column('varchar', { length: 400 })
+  imageUrl: string;
 
   @Column('varchar', { length: 50 })
-  lastName: string;
+  rating: number;
 }

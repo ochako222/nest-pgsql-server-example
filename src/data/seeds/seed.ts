@@ -1,37 +1,24 @@
-import doctors from './doctors-init-state';
-import users from './users-init-state'
-import timeSlots from './time-slots-init-state'
-import {IDoctor, ITimeSlot, IUser} from "../../types";
-import {DoctorsService} from "../../doctors/doctors.service";
-import {UsersService} from "../../users/users.service";
-import {TimeSlotsService} from "../../time-slots/timeSlots.service";
-import {timeSlotsRepository} from "../repositories";
-import {getRandomDigit} from "../../helpers/utils";
+import users from './users-init-state';
+import { ProductI, UserI } from '../../types';
+import { UsersService } from '../../users/users.service';
+import products from './products-init-state';
+import { ProductsService } from '../../products/products.service';
 
-const doctorsService = new DoctorsService()
-const usersService = new UsersService()
-const timeSlotsService = new TimeSlotsService()
+const productsService = new ProductsService();
+const usersService = new UsersService();
 
 console.log('Running seed...');
+
 try {
+  products.forEach((product: ProductI) => {
+    productsService.create(product);
+  });
 
-    doctors.forEach((doctor: IDoctor) => {
-        doctorsService.create(doctor);
-    });
-
-    users.forEach((user: IUser) => {
-        usersService.create(user)
-    })
-
-    timeSlots.forEach(async (timeSlot: ITimeSlot) => {
-        await timeSlotsRepository.createTimeSlot({
-            ...timeSlot,
-            id: getRandomDigit(),
-        });
-    })
-
-
+  users.forEach((user: UserI) => {
+    usersService.create(user);
+  });
 } catch (error: any) {
-    throw new Error(error);
+  throw new Error(error);
 }
+
 console.log('Seed completed');
