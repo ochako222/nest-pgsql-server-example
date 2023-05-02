@@ -1,23 +1,11 @@
 import { createConnection } from 'typeorm';
 
-import {
-  database,
-  username,
-  password,
-  host,
-  port,
-} from '../../../config/db.config';
-
 import { modelArray } from '../models';
 
 const connection = createConnection({
   type: 'postgres',
-  host: host,
-  port: Number(port),
-  username,
-  password,
-  database,
-  logging: false,
+  port: 5432,
+  url: 'postgres://postgres:postgres@db:5432/db',
   entities: modelArray,
   synchronize: true,
 });

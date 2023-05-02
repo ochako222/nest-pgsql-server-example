@@ -1,15 +1,23 @@
 version: '3.8'
 
 services:
-  postgres:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - db
+    environment:
+      PORT: 3001
+    ports:
+      - "3001:3001"
+  db:
     image: postgres:14.1
     restart: always
     container_name: postgres
     environment:
-      POSTGRES_DB: ${DB_NAME:-entities}
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
-      - ${DB_PORT:-5432}:5432
-    volumes:
-      - ./docker/pgdata:/var/lib/postgresql/data
+      - 5432:5432
