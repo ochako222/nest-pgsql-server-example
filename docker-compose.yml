@@ -1,16 +1,6 @@
 version: '3.8'
 
 services:
-  api:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    depends_on:
-      - db
-    environment:
-      PORT: 3001
-    ports:
-      - "3001:3001"
   db:
     image: postgres:14.1
     restart: always
@@ -21,3 +11,14 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
+  api:
+    container_name: server
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - db
+    environment:
+      PORT: 3001
+    ports:
+      - "3001:3001"
